@@ -16,6 +16,7 @@ import com.eastnet.wechat.utils.DBCPConnection;
 import com.eastnet.wechat.utils.MessageUtil;
 import com.eastnet.wechat.utils.OpenDBConnection;
 import com.eastnet.wechat.utils.OperatorUtil;
+import com.eastnet.wechat.utils.TulingApiUtil;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
@@ -143,7 +144,7 @@ public class EastnetService {
 //		            }
 //				}
 //				respContent=sb.toString();
-				respContent = "您发送的是文本消息！";
+				respContent=TulingApiUtil.getTulingResult(fromContent);
 				//respContent = new OpenDBConnection().selectData("select * from crm_student_info");
 			}
 			//图片消息
