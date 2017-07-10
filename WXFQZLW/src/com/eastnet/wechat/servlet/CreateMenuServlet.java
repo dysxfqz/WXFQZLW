@@ -2,6 +2,10 @@ package com.eastnet.wechat.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +18,7 @@ import com.eastnet.wechat.pojo.CommonButton;
 import com.eastnet.wechat.pojo.ComplexButton;
 import com.eastnet.wechat.pojo.Menu;
 import com.eastnet.wechat.pojo.ViewButton;
+import com.eastnet.wechat.utils.DBCPConnection;
 import com.eastnet.wechat.utils.WeixinUtil;
 
 public class CreateMenuServlet extends HttpServlet {
@@ -45,7 +50,6 @@ public class CreateMenuServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		// 第三方用户唯一凭证  
         String appId = "你的appId";  
         // 第三方用户唯一凭证密钥  
@@ -85,7 +89,7 @@ public class CreateMenuServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		doGet(request, response);
 	}
 
