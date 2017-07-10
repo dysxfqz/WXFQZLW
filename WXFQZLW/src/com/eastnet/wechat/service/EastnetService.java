@@ -123,7 +123,17 @@ public class EastnetService {
 			textMessage.setCreateTime(new Date().getTime());
 			textMessage.setMsgType(MessageUtil.RESP_MESSSAGE_TYPE_TEXT);
 			textMessage.setFuncFlag(0);
-			StringBuffer sb=new StringBuffer();
+			Connection conn=new DBCPConnection().getConnection();
+			if(conn!=null){
+				String sql="insert into mess_record(id,to_user_name,from_user_name,msg_type,content) value(?,?,?,?,?)";  
+		        PreparedStatement pstmt=(PreparedStatement) conn.prepareStatement(sql);  
+	            pstmt.setString(1,"Mess"+new Date().getTime());  
+	            pstmt.setString(2,toUserName);  
+	            pstmt.setString(3,fromUserName);  
+	            pstmt.setInt(4,0); 
+	            pstmt.setString(5,fromContent);  
+	            pstmt.executeUpdate();  
+			}
 			//文本消息
 			if(msgType.equals(MessageUtil.REQ_MESSSAGE_TYPE_TEXT)){
 //				Connection conn=new DBCPConnection().getConnection();
@@ -180,6 +190,16 @@ public class EastnetService {
 					//自定义菜单消息处理
 					System.out.println("自定义菜单消息处理");
 				}
+			}
+			if(conn!=null){
+				String sql="insert into mess_record(id,to_user_name,from_user_name,msg_type,content) value(?,?,?,?,?)";  
+		        PreparedStatement pstmt=(PreparedStatement) conn.prepareStatement(sql);  
+	            pstmt.setString(1,"Mess"+new Date().getTime());  
+	            pstmt.setString(2,fromUserName);  
+	            pstmt.setString(3,toUserName);  
+	            pstmt.setInt(4,0); 
+	            pstmt.setString(5,respContent);  
+	            pstmt.executeUpdate();  
 			}
 			textMessage.setContent(respContent);
 			respMessage=("<xml><ToUserName><![CDATA["+requestMap.get("FromUserName")+
