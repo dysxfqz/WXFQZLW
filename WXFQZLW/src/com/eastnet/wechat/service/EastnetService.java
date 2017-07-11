@@ -125,13 +125,14 @@ public class EastnetService {
 			textMessage.setFuncFlag(0);
 			Connection conn=new DBCPConnection().getConnection();
 			if(conn!=null){
-				String sql="insert into mess_record(id,to_user_name,from_user_name,msg_type,content) value(?,?,?,?,?)";  
+				String sql="insert into mess_record(id,to_user_name,from_user_name,msg_type,content,create_time) value(?,?,?,?,?,?)";  
 		        PreparedStatement pstmt=(PreparedStatement) conn.prepareStatement(sql);  
 	            pstmt.setString(1,"Mess"+new Date().getTime());  
 	            pstmt.setString(2,toUserName);  
 	            pstmt.setString(3,fromUserName);  
 	            pstmt.setInt(4,0); 
 	            pstmt.setString(5,fromContent);  
+	            pstmt.setDate(6, new java.sql.Date(new Date().getTime())); 
 	            pstmt.executeUpdate();  
 			}
 			//文本消息
@@ -192,13 +193,14 @@ public class EastnetService {
 				}
 			}
 			if(conn!=null){
-				String sql="insert into mess_record(id,to_user_name,from_user_name,msg_type,content) value(?,?,?,?,?)";  
-		        PreparedStatement pstmt=(PreparedStatement) conn.prepareStatement(sql);  
+				String sql="insert into mess_record(id,to_user_name,from_user_name,msg_type,content,create_time) value(?,?,?,?,?,?)";  
+			    PreparedStatement pstmt=(PreparedStatement) conn.prepareStatement(sql);  
 	            pstmt.setString(1,"Mess"+new Date().getTime());  
 	            pstmt.setString(2,fromUserName);  
 	            pstmt.setString(3,toUserName);  
 	            pstmt.setInt(4,0); 
 	            pstmt.setString(5,respContent);  
+	            pstmt.setDate(6, new java.sql.Date(new Date().getTime())); 
 	            pstmt.executeUpdate();  
 			}
 			textMessage.setContent(respContent);
